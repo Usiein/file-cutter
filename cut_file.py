@@ -51,5 +51,23 @@ def write_file(filename, data):
         print('Can\'t write data to output file, IO error')
         exit(1)
 
+def lines_number_cut(filename, lines, buffer) -> None:
+    lines_in_file, count_of_files, lines_remaining = get_lines_cut_options(filename, lines)
+    range_of_lines = get_ranges_of_lines(lines, count_of_files, lines_remaining)
+    print(f'File will be cut on {str(count_of_files)} parts')
+    line_count = 1
+    temp_1000_lines = []
+    for line in tqdm(read_file(filename), ascii=True, dynamic_ncols=True, total=line_count, unit=" lines"):
+        for key, value in ranges_of_lines.items():
+            name = key + '.txt'
+            start_line = value['start']
+            end_line = value['end']
+            if line_count >= start_line and line_count <= end_line:
+                temp_1000_lines.append(line)
+                id len(temp_1000_lines) > buffer:
+                    write_file(name, temp_1000_lines)
+                    del temp_1000_lines[:]
+        line_count += 1
+
 if __name__ == "__main__":
     main()
