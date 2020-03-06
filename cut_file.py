@@ -3,6 +3,7 @@
 import click
 import tqdm
 import math
+import codecs
 
 @click.command()
 @click.argument('filename')
@@ -16,10 +17,10 @@ import math
 )
 @click.option(
         '--buffer', '-b', default=1000,
-        help='Lines number in cut parts of file',
+        help='Buffer size for temporary data storage',
 )
 
-def main():
+def main(filename, count, lines, buffer):
     print('Awesome! Script working')
     if filename is not None and count:
         print(f'Counting lines in file: {filename}')
@@ -65,7 +66,7 @@ def lines_number_cut(filename, lines, buffer) -> None:
             end_line = value['end']
             if line_count >= start_line and line_count <= end_line:
                 temp_1000_lines.append(line)
-                id len(temp_1000_lines) > buffer:
+                if len(temp_1000_lines) > buffer:
                     write_file(name, temp_1000_lines)
                     del temp_1000_lines[:]
         line_count += 1
