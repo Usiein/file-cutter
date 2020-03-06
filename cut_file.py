@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import click
+import tqdm
 
 @click.command()
 @click.argument('filename')
@@ -32,7 +33,14 @@ def lines_counter(filename):
         line_count += 1
     return line_count
 
-
+def read_file(filename):
+    try:
+        with codecs.open(filename, 'r', encoding='utf-8', errors='ignore') as file:
+            for line in file:
+                yield line
+    except IOError:
+        print('Can\'t read from file, IO error')
+        exit(1)
 
 if __name__ == "__main__":
     main()
