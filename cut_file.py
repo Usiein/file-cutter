@@ -77,7 +77,17 @@ def get_lines_cut_options(filename, lines):
     return lines_in_file, count_of_files, lines_remaining
 
 def get_ranges_of_lines(lines, count_of_files, lines_remaining):
-
+    start_range = 1
+    list_of_ranges = {}
+    for current_file_number in range(count_of_files):
+        if current_file_number <= count_of_files - 2:
+            end_range = start_range + int(lines) - 1
+        else:
+            end_range = start_range + lines_remaining
+        lines_in_range = str(start_range) + '-' + str(end_range)
+        list_of_ranges[lines_in_range] = {'start':start_range, 'end':end_range}
+        start_range = start_range + int(lines)
+    return list_of_ranges
 
 if __name__ == "__main__":
     main()
