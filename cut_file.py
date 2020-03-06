@@ -55,7 +55,7 @@ def write_file(filename, data):
 
 def lines_number_cut(filename, lines, buffer) -> None:
     lines_in_file, count_of_files, lines_remaining = get_lines_cut_options(filename, lines)
-    range_of_lines = get_ranges_of_lines(lines, count_of_files, lines_remaining)
+    ranges_of_lines = get_ranges_of_lines(lines, count_of_files, lines_remaining)
     print(f'File will be cut on {str(count_of_files)} parts')
     line_count = 1
     temp_1000_lines = []
