@@ -2,6 +2,7 @@
 
 import click
 import tqdm
+import math
 
 @click.command()
 @click.argument('filename')
@@ -68,6 +69,15 @@ def lines_number_cut(filename, lines, buffer) -> None:
                     write_file(name, temp_1000_lines)
                     del temp_1000_lines[:]
         line_count += 1
+
+def get_lines_cut_options(filename, lines):
+    lines_in_file = lines_counter(filename)
+    count_of_files = math.ceil(lines_in_file / int(lines))
+    lines_remaining = lines_in_file % int(lines)
+    return lines_in_file, count_of_files, lines_remaining
+
+def get_ranges_of_lines(lines, count_of_files, lines_remaining):
+
 
 if __name__ == "__main__":
     main()
