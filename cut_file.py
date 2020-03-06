@@ -1,7 +1,7 @@
 #!/bin/python3
 
 import click
-import tqdm
+from tqdm import tqdm
 import math
 import codecs
 
