@@ -26,6 +26,11 @@ def main():
     if filename is not None and lines is not None and buffer is not None:
         lines_number_cut(filename, lines, buffer)
 
+def lines_counter(filename):
+    line_count = 0
+    for line in tqdm(read_file(filename), ascii=True, dynamic_ncols=True, total=line_count, unit=' lines'):
+        line_count += 1
+    return line_count
 
 
 
