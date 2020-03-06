@@ -42,5 +42,14 @@ def read_file(filename):
         print('Can\'t read from file, IO error')
         exit(1)
 
+def write_file(filename, data):
+    try:
+        with codecs.open(filename, 'a', encoding='utf-8', errors='ignore') as file:
+            file.writelines(data)
+        return True
+    except IOError:
+        print('Can\'t write data to output file, IO error')
+        exit(1)
+
 if __name__ == "__main__":
     main()
